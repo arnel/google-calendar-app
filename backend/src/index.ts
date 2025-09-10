@@ -29,7 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/auth", authRoutes);
-app.use("/api", eventRoutes);
+// Event routes are mounted under /api/events
+app.use("/api/events", eventRoutes);
 
 // Health check
 app.get("/health", (req, res) => {

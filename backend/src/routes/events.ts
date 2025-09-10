@@ -9,8 +9,9 @@ const router = Router();
 const googleCalendarService = new GoogleCalendarService();
 
 // Get events with date filtering
+// Mounted at /api/events in the server
 router.get(
-  "/events",
+  "/",
   authenticateToken,
   [query("days").optional().isInt({ min: 1, max: 365 }), query("startDate").optional().isISO8601()],
   async (req: AuthRequest, res) => {
@@ -56,8 +57,9 @@ router.get(
 );
 
 // Create new event
+// Mounted at /api/events in the server
 router.post(
-  "/events",
+  "/",
   authenticateToken,
   [
     body("title").notEmpty().withMessage("Title is required"),
@@ -107,7 +109,8 @@ router.post(
 );
 
 // Refresh events from Google Calendar
-router.post("/events/refresh", authenticateToken, async (req: AuthRequest, res) => {
+// Mounted at /api/events in the server
+router.post("/refresh", authenticateToken, async (req: AuthRequest, res) => {
   try {
     const user = req.user!;
 
